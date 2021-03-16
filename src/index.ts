@@ -54,7 +54,7 @@ const myP5 = (sketch) => {
     // accepts main canvas width, height
     const setupSecondCanvas = (width, height) => {
       // setup a separate canvas for the visualization
-      graphicsDimension = {x: width / 2, y: height};
+      graphicsDimension = {x: Math.ceil(width / 2), y: height};
       canvas = sketch.createGraphics(graphicsDimension.x, graphicsDimension.y);
       canvas.background("#373737");
       canvas.noStroke();
@@ -117,9 +117,11 @@ const myP5 = (sketch) => {
         sketch.image(canvas, 0, 0);
 
         // make it symmetric
+        sketch.push();
         sketch.scale(-1, 1);
         sketch.translate(-sketch.width, 0);
         sketch.image(canvas, 0, 0);
+        sketch.pop();
         canvas.clear();
         if (partitions.length === 0) {
             sketch.noLoop();
